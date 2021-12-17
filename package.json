@@ -4,11 +4,11 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "build": "npm run build --workspace ./cdktf",
-        "compile": "npm run synth --workspace ./cdktf",
-        "deploy": "npm run deploy --workspace ./cdktf"
+        "build": "npm run build --workspace ./source",
+        "compile": "npm run synth --workspace ./source",
+        "deploy": "npm run deploy --workspace ./source"
     },
     "workspaces": [
-        "./cdktf"
+        "./source"
     ]
 }
