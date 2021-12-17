@@ -1,0 +1,14 @@
+{
+    "name": "@cloud-vault/factory",
+    "public": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "npm run build --workspace ./cdktf",
+        "compile": "npm run synth --workspace ./cdktf",
+        "deploy": "npm run deploy --workspace ./cdktf"
+    },
+    "workspaces": [
+        "./cdktf"
+    ]
+}
