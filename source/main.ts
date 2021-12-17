@@ -114,7 +114,7 @@ class Lambda extends Configuration {
             {
                 Action: "sts:AssumeRole",
                 Principal: {
-                    Service: "lambda.amazonAWS.com"
+                    Service: "lambda.amazonaws.com"
                 },
                 Effect: "Allow",
                 Sid: ""
@@ -273,25 +273,27 @@ class Stack extends TerraformStack {
         new AWS.lambdafunction.LambdaPermission(this, [ID, "Gateway-Invoke-Permission"].join(" "), {
             functionName: lambda.functionName,
             action: "lambda:InvokeFunction",
-            principal: "apigateway.amazonAWS.com",
+            principal: "apigateway.amazonaws.com",
             sourceArn: [api.executionArn, "*", "*"].join("/")
         })
 
         /// URI to API-Gateway-Lambda Invocation URL
         new TerraformOutput(this, "url", {
-            value: api.apiEndpoint
+            value: api.apiEndpoint.trim()
         });
     }
 }
+
+
+const Application = new App();
 
 const Main = async () => {
     const Awaitable = () => new Promise((resolve) => {
         try {
             const Application = new App();
-
             const Function = new Lambda("lambda", "POC-Service");
 
-            const Instance = new Stack(Application, Function.ID, Function);
+            new Stack(Application, Function.ID, Function);
 
             Application.synth();
         } catch (error) {
@@ -306,8 +308,8 @@ const Main = async () => {
     await Awaitable();
 };
 
-await (async () => await Main());
+const Function = new Lambda("lambda", "POC-Service");
 
-export { Main };
-export default Main;
+const $ = new Stack(Application, Function.ID, Function);
 
+Application.synth();

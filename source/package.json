@@ -13,6 +13,7 @@
         "start": "tsc --pretty --watch",
         "deploy": "npm run get && cdktf deploy",
         "destroy": "cdktf destroy",
+        "setup": "cd ci && make synth",
         "upgrade": "npm i cdktf@latest cdktf-cli@latest",
         "upgrade:next": "npm i cdktf@next cdktf-cli@next"
     },

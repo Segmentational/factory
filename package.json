@@ -6,7 +6,8 @@
     "scripts": {
         "build": "npm run build --workspace ./source",
         "compile": "npm run synth --workspace ./source",
-        "deploy": "npm run deploy --workspace ./source"
+        "deploy": "npm run deploy --workspace ./source",
+        "destroy": "npm run destroy --workspace ./source"
     },
     "workspaces": [
         "./source"

@@ -35,6 +35,12 @@ Wipe = rm -r -f node_modules
 Packages = example-1 administration get-secret list-secrets
 Folders = $(foreach _, $(Packages), $(Directory)/packages/template-lambda/template/packages/$_)
 
+synth:
+	@cd - && npm install
+	@cd - && npm run get
+	@cd - && npm run build
+	@cd - && npm run synth
+
 clean:
 	$(foreach Target, $(Folders), ( cd $(Target) && $(Wipe) || sudo $(Wipe) || true ) ; )
 
